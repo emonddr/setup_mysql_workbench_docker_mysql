@@ -1,0 +1,24 @@
+{
+  "name": "setup_mysql_workbench_docker_mysql",
+  "version": "1.0.0",
+  "description": "Instructions on how to succesfully connect MySQL Workbench to MySQL 8.0 running in a Docker container",
+  "main": "",
+  "scripts": {
+    "get-mysql-image": "docker pull mysql/mysql-server:latest",
+    "list-images": "docker images",
+    "create-mysql-container": "docker run --name dom-mysql --hostname 192.168.99.100  -p 3306:3306 -e MYSQL_ROOT_PASSWORD=my-secret-pw  -d mysql/mysql-server",
+    "show-docker-machine-ip": "docker-machine ip default",
+    "start-container": "docker start dom-mysql",
+    "stop-container": "docker stop dom-mysql",
+    "remove-container": "docker rm dom-mysql",
+    "show-logs": "docker logs dom-mysql",
+    "open-prompt": "docker exec -it dom-mysql /bin/bash",
+    "open-mysql-prompt": "docker exec -it dom-mysql mysql -uroot -p",
+    "copy-cnf": "docker cp my.cnf dom-mysql:/etc/my.cnf",
+    "list-containers": "docker ps",
+    "list-all-containers": "docker ps -a"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
