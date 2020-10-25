@@ -172,11 +172,39 @@ SELECT user,host FROM user; // you can see the user definitions. There should be
 drop user 'root'@'localhost';
 CREATE USER 'root'@'%' IDENTIFIED BY 'my-secret-pw';
 GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+```
+
+Type `exit` to get out of the interactive shell
+
+
+Now stop and start the container.
+
+```sh
+npm run stop-container
+npm run start-container
+```
+
+We gotta go in and change one more thing (we are not able to do it in the same mysql session.)
+
+Open the mysql prompt again:
+
+```sh
+npm run open-mysql-prompt
+```
+
+You will be prompted for the password. Enter `my-secret-pw`.
+
+Perform the following commands:
+
+```sh
+use mysql;
 ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'my-secret-pw';
 FLUSH PRIVILEGES;
 ```
 
 Type `exit` to get out of the interactive shell
+
 
 The `mysql_native_password` step above is to change the new/default [sha2](https://dev.mysql.com/doc/refman/8.0/en/caching-sha2-pluggable-authentication.html) authentication method in MySQL 8.0 back to the old [native](https://dev.mysql.com/doc/refman/8.0/en/native-pluggable-authentication.html) authentication method favoured by programmers who uses prior versions of MySQL.
 
